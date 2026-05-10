@@ -1,7 +1,8 @@
 export interface User {
   id: string;
-  first_name: string;
-  last_name: string;
+  username: string;
+  name: string;
+  surname: string;
   email: string;
   company_id: string | null;
   role: string | null;
@@ -9,8 +10,9 @@ export interface User {
 }
 
 export interface CreateUserDto {
-  first_name: string;
-  last_name: string;
+  username: string;
+  name: string;
+  surname: string;
   email: string;
   password: string;
 }

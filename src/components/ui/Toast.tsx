@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { X, CheckCircle, XCircle, AlertCircle, Info } from 'lucide-react';
 import { useUIStore } from '../../stores';
 
