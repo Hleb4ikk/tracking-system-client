@@ -9,15 +9,15 @@ interface ProtectedRouteProps {
 }
 
 export const ProtectedRoute: React.FC<ProtectedRouteProps> = ({ children }) => {
-  const { isAuthenticated, isLoading } = useAuthStore();
+  const { isAuthenticated, isLoading, isInitialized } = useAuthStore();
   const location = useLocation();
 
-  if (isLoading) {
+  // Wait for auth check to complete
+  if (!isInitialized || isLoading) {
     return <LoadingOverlay message="Checking authentication..." />;
   }
 
   if (!isAuthenticated) {
-    // Redirect to login but save the attempted location
     return <Navigate to={ROUTES.LOGIN} state={{ from: location }} replace />;
   }
 

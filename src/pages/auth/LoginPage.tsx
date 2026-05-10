@@ -41,7 +41,6 @@ export const LoginPage: React.FC = () => {
       toast.success('Successfully logged in!');
       navigate(ROUTES.DASHBOARD);
     } catch (err) {
-      // Error handled by store and useEffect
     }
   };
 

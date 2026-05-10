@@ -15,7 +15,6 @@ const apiClient: AxiosInstance = axios.create({
 // Request interceptor
 apiClient.interceptors.request.use(
   (config: InternalAxiosRequestConfig) => {
-    // Можно добавить логирование или другую логику
     return config;
   },
   (error: AxiosError) => {
@@ -23,36 +22,29 @@ apiClient.interceptors.request.use(
   }
 );
 
-// Response interceptor
 apiClient.interceptors.response.use(
   (response) => {
     return response;
   },
-  (error: AxiosError<ApiError>) => {
-    // Обработка ошибок
+  (error: AxiosError<any>) => {
     if (error.response) {
       const apiError: ApiError = {
-        message: error.response.data?.message || 'An error occurred',
+        message: error.response.data?.message || error.response.data?.error || 'An error occurred',
         statusCode: error.response.status,
-        error: error.response.data?.error,
+        error: error.response.data?.error || error.response.statusText,
       };
-
-      // Если 401 - перенаправляем на login
-      if (error.response.status === 401) {
-        // Очищаем состояние и редиректим
+      if (error.response.status === 401 && !error.config?.url?.includes('/auth/login')) {
         window.location.href = '/login';
       }
 
       return Promise.reject(apiError);
     } else if (error.request) {
-      // Запрос был отправлен, но ответа не получено
       const apiError: ApiError = {
-        message: 'No response from server',
+        message: 'No response from server. Please check your connection.',
         statusCode: 0,
       };
       return Promise.reject(apiError);
     } else {
-      // Ошибка при настройке запроса
       const apiError: ApiError = {
         message: error.message || 'Request setup error',
         statusCode: 0,

@@ -1,17 +1,19 @@
 import { create } from 'zustand';
 import { User, LoginUserDto, CreateUserDto } from '../types';
-import { authApi } from '../api';
+import { authApi, userApi } from '../api';
 
 interface AuthState {
   user: User | null;
   isAuthenticated: boolean;
   isLoading: boolean;
+  isInitialized: boolean;
   error: string | null;
   
   // Actions
   login: (credentials: LoginUserDto) => Promise<void>;
   register: (data: CreateUserDto) => Promise<void>;
   logout: () => Promise<void>;
+  checkAuth: () => Promise<void>;
   setUser: (user: User | null) => void;
   clearError: () => void;
 }
@@ -20,6 +22,7 @@ export const useAuthStore = create<AuthState>((set) => ({
   user: null,
   isAuthenticated: false,
   isLoading: false,
+  isInitialized: false,
   error: null,
 
   login: async (credentials: LoginUserDto) => {
@@ -30,11 +33,13 @@ export const useAuthStore = create<AuthState>((set) => ({
         user: response.user,
         isAuthenticated: true,
         isLoading: false,
+        isInitialized: true,
       });
     } catch (error: any) {
       set({
         error: error.message || 'Login failed',
         isLoading: false,
+        isInitialized: true,
       });
       throw error;
     }
@@ -48,11 +53,13 @@ export const useAuthStore = create<AuthState>((set) => ({
         user: response.user,
         isAuthenticated: true,
         isLoading: false,
+        isInitialized: true,
       });
     } catch (error: any) {
       set({
         error: error.message || 'Registration failed',
         isLoading: false,
+        isInitialized: true,
       });
       throw error;
     }
@@ -73,6 +80,26 @@ export const useAuthStore = create<AuthState>((set) => ({
         isLoading: false,
       });
       throw error;
+    }
+  },
+
+  checkAuth: async () => {
+    set({ isLoading: true, error: null });
+    try {
+      const response = await userApi.getCurrentUser();
+      set({
+        user: response.user,
+        isAuthenticated: true,
+        isLoading: false,
+        isInitialized: true,
+      });
+    } catch (error: any) {
+      set({
+        user: null,
+        isAuthenticated: false,
+        isLoading: false,
+        isInitialized: true,
+      });
     }
   },
 

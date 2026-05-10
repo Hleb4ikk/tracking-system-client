@@ -35,7 +35,7 @@ interface UIState {
 export const useUIStore = create<UIState>((set) => ({
   toasts: [],
   modals: [],
-  isSidebarOpen: true,
+  isSidebarOpen: window.innerWidth >= 1024, // Open by default on desktop
 
   addToast: (toast) => {
     const id = Math.random().toString(36).substring(7);
