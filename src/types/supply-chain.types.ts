@@ -1,4 +1,40 @@
-export interface SupplyNode {
+// Supply Node Connection types
+export interface SupplyNodeConnection {
+  id: string;
+  start_node: {
+    id: string;
+    title: string;
+    description: string | null;
+    country: string;
+    zip: string;
+    region: string;
+    city: string;
+    address_line: string;
+    company_id: string;
+  };
+  destination_node: {
+    id: string;
+    title: string;
+    description: string | null;
+    country: string;
+    zip: string;
+    region: string;
+    city: string;
+    address_line: string;
+    company_id: string;
+  };
+  supply_chain_id: string;
+  distance: number;
+}
+
+// Supply Graph types
+export interface SupplyGraphEdge {
+  conn_id: string;
+  node: SupplyGraphNode;
+  distance: number;
+}
+
+export interface SupplyGraphNode {
   id: string;
   title: string;
   description: string | null;
@@ -8,16 +44,16 @@ export interface SupplyNode {
   city: string;
   address_line: string;
   company_id: string;
+  next: SupplyGraphEdge[];
 }
 
-export interface SupplyNodeConnection {
-  id: string;
-  start_node: SupplyNode;
-  destination_node: SupplyNode;
-  distance: number;
-  supply_chain_id: string;
+export interface SupplyGraph {
+  supplyNode?: SupplyGraphNode;
+  allNodes?: Map<string, SupplyGraphNode>;
+  connections?: SupplyNodeConnection[];
 }
 
+// Supply Chain types
 export interface SupplyChain {
   id: string;
   title: string;
@@ -25,36 +61,32 @@ export interface SupplyChain {
   company_id: string;
 }
 
-export interface SupplyChainWithConnections extends SupplyChain {
-  supply_node_connections: SupplyNodeConnection[];
+export interface SupplyChainWithGraph extends SupplyChain {
+  supplyGraph: SupplyGraph;
 }
 
+// DTOs for API
 export interface CreateSupplyChainDto {
   title: string;
-  description?: string;
+  description?: string | null;
+  supply_node_connections?: Array<{
+    startNodeId: string;
+    destinationNodeId: string;
+    distance: number;
+  }>;
 }
 
 export interface UpdateSupplyChainDto {
   title?: string;
-  description?: string;
+  description?: string | null;
+  supply_node_connections?: Array<{
+    startNodeId: string;
+    destinationNodeId: string;
+    distance: number;
+  }>;
 }
 
-export interface CreateSupplyNodeDto {
-  title: string;
-  description?: string;
-  country: string;
-  zip: string;
-  region: string;
-  city: string;
-  address_line: string;
-}
-
-export interface UpdateSupplyNodeDto {
+export interface SupplyChainFilters {
   title?: string;
-  description?: string;
-  country?: string;
-  zip?: string;
-  region?: string;
-  city?: string;
-  address_line?: string;
+  companyId?: string;
 }

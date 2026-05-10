@@ -32,7 +32,7 @@ export interface OrderWithDetails extends Order {
 export interface CreateOrderDto {
   title: string;
   status: string;
-  description?: string;
+  description?: string | null;
   responsibleId: string;
   recieverId: string;
 }
@@ -40,7 +40,7 @@ export interface CreateOrderDto {
 export interface UpdateOrderDto {
   title?: string;
   status?: string;
-  description?: string;
+  description?: string | null;
   responsibleId?: string;
   recieverId?: string;
 }

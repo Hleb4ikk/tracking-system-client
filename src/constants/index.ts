@@ -48,6 +48,12 @@ export const CARGO_STATUS = {
   DELIVERED: 'delivered',
 } as const;
 
+export const DELIVERY_TYPE = {
+  LAND: 'land',
+  WATER: 'water',
+  AIR: 'air',
+} as const;
+
 export const ROLES = {
   CO_FOUNDER: 'co-founder',
   LOGISTICIAN: 'logistician',

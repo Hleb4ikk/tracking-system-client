@@ -1,9 +1,21 @@
 import apiClient from './client';
-import { Vehicle, CreateVehicleDto, UpdateVehicleDto } from '../types';
+import { Vehicle, CreateVehicleDto, UpdateVehicleDto, VehicleFilters } from '../types';
 
 export const vehiclesApi = {
-  getVehicles: async (page: number = 1): Promise<Vehicle[]> => {
-    const response = await apiClient.get<Vehicle[]>(`/vehicles?page=${page}`);
+  getVehicles: async (page: number = 1, filters?: VehicleFilters): Promise<Vehicle[]> => {
+    const params = new URLSearchParams({ page: page.toString() });
+    
+    if (filters?.title) {
+      params.append('title', filters.title);
+    }
+    if (filters?.deliveryType) {
+      params.append('deliveryType', filters.deliveryType);
+    }
+    if (filters?.companyId) {
+      params.append('companyId', filters.companyId);
+    }
+
+    const response = await apiClient.get<Vehicle[]>(`/vehicles?${params.toString()}`);
     return response.data;
   },
 

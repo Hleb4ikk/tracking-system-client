@@ -4,7 +4,6 @@ import { cargosApi } from '../api';
 
 interface CargosState {
   cargos: Cargo[];
-  currentCargo: Cargo | null;
   filters: CargoFilters;
   currentPage: number;
   isLoading: boolean;
@@ -12,18 +11,15 @@ interface CargosState {
 
   // Actions
   fetchCargos: (page?: number, filters?: CargoFilters) => Promise<void>;
-  fetchCargoById: (id: string) => Promise<void>;
   createCargo: (data: CreateCargoDto) => Promise<Cargo>;
   updateCargo: (id: string, data: UpdateCargoDto) => Promise<void>;
   deleteCargo: (id: string) => Promise<void>;
   setFilters: (filters: CargoFilters) => void;
-  clearCurrentCargo: () => void;
   clearError: () => void;
 }
 
 export const useCargosStore = create<CargosState>((set, get) => ({
   cargos: [],
-  currentCargo: null,
   filters: {},
   currentPage: 1,
   isLoading: false,
@@ -43,22 +39,6 @@ export const useCargosStore = create<CargosState>((set, get) => ({
     } catch (error: any) {
       set({
         error: error.message || 'Failed to fetch cargos',
-        isLoading: false,
-      });
-    }
-  },
-
-  fetchCargoById: async (id: string) => {
-    set({ isLoading: true, error: null });
-    try {
-      const response = await cargosApi.getCargoById(id);
-      set({
-        currentCargo: response.cargo,
-        isLoading: false,
-      });
-    } catch (error: any) {
-      set({
-        error: error.message || 'Failed to fetch cargo',
         isLoading: false,
       });
     }
@@ -85,9 +65,6 @@ export const useCargosStore = create<CargosState>((set, get) => ({
     try {
       await cargosApi.updateCargo(id, data);
       set({ isLoading: false });
-      if (get().currentCargo?.id === id) {
-        await get().fetchCargoById(id);
-      }
       await get().fetchCargos(get().currentPage, get().filters);
     } catch (error: any) {
       set({
@@ -115,10 +92,6 @@ export const useCargosStore = create<CargosState>((set, get) => ({
 
   setFilters: (filters: CargoFilters) => {
     set({ filters });
-  },
-
-  clearCurrentCargo: () => {
-    set({ currentCargo: null });
   },
 
   clearError: () => {

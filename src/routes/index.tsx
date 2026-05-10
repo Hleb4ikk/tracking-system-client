@@ -5,52 +5,20 @@ import { CompanyRequiredRoute } from './CompanyRequiredRoute';
 import { AuthLayout, AppLayout } from '../components/layout';
 import { LoginPage, RegisterPage } from '../pages/auth';
 import { DashboardPage } from '../pages/dashboard';
-import { CompanyOnboardingPage, InvitationsPage } from '../pages/company';
+import { CompanyOnboardingPage, InvitationsPage, CompanySettingsPage } from '../pages/company';
 import { OrdersListPage } from '../pages/orders';
+import { CargosListPage } from '../pages/cargos';
+import { SupplyNodesListPage } from '../pages/supply-nodes';
+import { SupplyChainsListPage } from '../pages/supply-chains';
+import { VehiclesListPage } from '../pages/vehicles';
+import { ReceiversListPage } from '../pages/receivers';
+
+// Root redirect component that checks auth state
+const RootRedirect = () => {
+  return <Navigate to={ROUTES.DASHBOARD} replace />;
+};
 
 // Placeholder components for routes we'll create later
-const CargosPage = () => (
-  <div>
-    <h1 className="text-2xl font-bold text-gray-900 dark:text-gray-100 mb-4">Cargos</h1>
-    <p className="text-gray-600 dark:text-gray-400">Cargos module coming in Phase 6</p>
-  </div>
-);
-
-const VehiclesPage = () => (
-  <div>
-    <h1 className="text-2xl font-bold text-gray-900 dark:text-gray-100 mb-4">Vehicles</h1>
-    <p className="text-gray-600 dark:text-gray-400">Vehicles module coming in Phase 9</p>
-  </div>
-);
-
-const SupplyChainsPage = () => (
-  <div>
-    <h1 className="text-2xl font-bold text-gray-900 dark:text-gray-100 mb-4">Supply Chains</h1>
-    <p className="text-gray-600 dark:text-gray-400">Supply Chains module coming in Phase 7</p>
-  </div>
-);
-
-const SupplyNodesPage = () => (
-  <div>
-    <h1 className="text-2xl font-bold text-gray-900 dark:text-gray-100 mb-4">Supply Nodes</h1>
-    <p className="text-gray-600 dark:text-gray-400">Supply Nodes module coming in Phase 8</p>
-  </div>
-);
-
-const ReceiversPage = () => (
-  <div>
-    <h1 className="text-2xl font-bold text-gray-900 dark:text-gray-100 mb-4">Receivers</h1>
-    <p className="text-gray-600 dark:text-gray-400">Receivers module coming in Phase 10</p>
-  </div>
-);
-
-const CompanyPage = () => (
-  <div>
-    <h1 className="text-2xl font-bold text-gray-900 dark:text-gray-100 mb-4">Company</h1>
-    <p className="text-gray-600 dark:text-gray-400">Company module coming in Phase 11</p>
-  </div>
-);
-
 const ProfilePage = () => (
   <div>
     <h1 className="text-2xl font-bold text-gray-900 dark:text-gray-100 mb-4">Profile</h1>
@@ -61,7 +29,7 @@ const ProfilePage = () => (
 export const router = createBrowserRouter([
   {
     path: '/',
-    element: <Navigate to={ROUTES.DASHBOARD} replace />,
+    element: <RootRedirect />,
   },
   {
     path: '/',
@@ -105,31 +73,27 @@ export const router = createBrowserRouter([
       },
       {
         path: ROUTES.CARGOS,
-        element: <CargosPage />,
+        element: <CargosListPage />,
       },
       {
         path: ROUTES.VEHICLES,
-        element: <VehiclesPage />,
-      },
-      {
-        path: ROUTES.SUPPLY_CHAINS,
-        element: <SupplyChainsPage />,
+        element: <VehiclesListPage />,
       },
       {
         path: ROUTES.SUPPLY_NODES,
-        element: <SupplyNodesPage />,
+        element: <SupplyNodesListPage />,
+      },
+      {
+        path: ROUTES.SUPPLY_CHAINS,
+        element: <SupplyChainsListPage />,
       },
       {
         path: ROUTES.RECEIVERS,
-        element: <ReceiversPage />,
+        element: <ReceiversListPage />,
       },
       {
         path: ROUTES.COMPANY,
-        element: <CompanyPage />,
-      },
-      {
-        path: ROUTES.COMPANY_TEAM,
-        element: <CompanyPage />,
+        element: <CompanySettingsPage />,
       },
       {
         path: ROUTES.COMPANY_INVITATIONS,
@@ -137,7 +101,7 @@ export const router = createBrowserRouter([
       },
       {
         path: ROUTES.COMPANY_SETTINGS,
-        element: <CompanyPage />,
+        element: <CompanySettingsPage />,
       },
       {
         path: ROUTES.PROFILE,

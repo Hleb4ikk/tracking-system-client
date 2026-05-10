@@ -1,18 +1,26 @@
+export type DeliveryType = 'land' | 'water' | 'air';
+
 export interface Vehicle {
   id: string;
   title: string;
-  description: string | null;
+  delivery_type: DeliveryType;
   company_id: string;
   cargo_id: string | null;
 }
 
 export interface CreateVehicleDto {
   title: string;
-  description?: string;
+  deliveryType: DeliveryType;
 }
 
 export interface UpdateVehicleDto {
   title?: string;
-  description?: string;
-  cargo_id?: string;
+  deliveryType?: DeliveryType;
+  cargoId?: string | null;
+}
+
+export interface VehicleFilters {
+  title?: string;
+  deliveryType?: DeliveryType;
+  companyId?: string;
 }

@@ -10,7 +10,7 @@ function App() {
 
   useEffect(() => {
     checkAuth();
-  }, [checkAuth]);
+  }, []); // Remove checkAuth from dependencies to prevent infinite calls
 
   if (!isInitialized) {
     return (

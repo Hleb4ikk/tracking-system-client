@@ -197,18 +197,201 @@
   - [x] Delete: co-founder, logistician
   - [x] View: все роли
 
-## ⏳ Фаза 6: Управление грузами (Следующая)
+## ✅ Фаза 6: Управление грузами (Завершено)
 
-- [ ] Cargos List Page
-- [ ] Cargo Details
-- [ ] Cargo Form (create/edit)
-- [ ] Привязка к orders
+- [x] Cargos List Page
+  - [x] CargosListPage с пагинацией
+  - [x] Фильтры (title, status)
+  - [x] URL search params синхронизация
+  - [x] Клик на карточку → открывает drawer с деталями
+  - [x] Кнопка "Create Cargo" → открывает drawer с формой
+  - [x] Кнопка удаления (role-based)
+  - [x] Empty states и loading states
+  - [x] Client-side фильтрация по title
+- [x] Cargo Details Component
+  - [x] CargoDetails компонент
+  - [x] Отображение статуса с цветными badges
+  - [x] Информация о vehicle и order
+  - [x] Supply node connection ID
+  - [x] Timeline (created_at, updated_at)
+  - [x] Кнопка "Edit Cargo" в drawer
+- [x] Cargo Form Component
+  - [x] CargoForm для create/edit
+  - [x] Валидация с Zod
+  - [x] Выбор order из списка (опционально)
+  - [x] Выбор vehicle из списка (опционально)
+  - [x] Supply node connection ID (текстовое поле)
+  - [x] Статус (assembly, on the way, delayed, delivered)
+  - [x] Автоматическое заполнение responsible (текущий user)
+  - [x] onSuccess callback для обновления списка
+- [x] API Integration
+  - [x] cargos.api.ts (getCargos, getCargoById, createCargo, updateCargo, deleteCargo)
+  - [x] cargo.schemas.ts (createCargoSchema, updateCargoSchema)
+  - [x] Интеграция с orders и vehicles API
+- [x] Role-based Access
+  - [x] Create: co-founder, logistician
+  - [x] Edit: co-founder, logistician, expeditor
+  - [x] Delete: co-founder, logistician
+  - [x] View: co-founder, logistician, expeditor
+- [x] Routes
+  - [x] /cargos маршрут добавлен
 
-## ⏳ Фаза 7-15: Остальные модули
+## ✅ Фаза 8: Управление узлами поставок (Завершено)
+
+- [x] Supply Nodes List Page
+  - [x] SupplyNodesListPage с пагинацией
+  - [x] Фильтры (title, country, city, region)
+  - [x] URL search params синхронизация
+  - [x] Клик на карточку → открывает drawer с деталями
+  - [x] Кнопка "Create Supply Node" → открывает drawer с формой
+  - [x] Кнопка удаления (role-based)
+  - [x] Empty states и loading states
+- [x] Supply Node Details Component
+  - [x] SupplyNodeDetails компонент
+  - [x] Отображение location информации
+  - [x] Company ID
+  - [x] Description (если есть)
+  - [x] Кнопка "Edit Supply Node" в drawer
+- [x] Supply Node Form Component
+  - [x] SupplyNodeForm для create/edit
+  - [x] Валидация с Zod
+  - [x] Поля: title, description, address_line, city, region, country, zip
+  - [x] Responsive grid layout
+  - [x] onSuccess callback для обновления списка
+- [x] API Integration
+  - [x] supply-nodes.api.ts (getSupplyNodes, getSupplyNodeById, createSupplyNode, updateSupplyNode, deleteSupplyNode)
+  - [x] supply-node.schemas.ts (createSupplyNodeSchema, updateSupplyNodeSchema)
+  - [x] Типы с правильными field names (address_line snake_case)
+- [x] Backend Compatibility
+  - [x] Frontend DTOs используют snake_case для соответствия backend
+  - [x] Схемы валидации используют address_line (не addressLine)
+  - [x] Формы используют правильные field names
+- [x] Role-based Access
+  - [x] Create: co-founder, logistician
+  - [x] Edit: co-founder, logistician
+  - [x] Delete: co-founder, logistician
+  - [x] View: все роли
+- [x] Routes
+  - [x] /supply-nodes маршрут добавлен
+
+## ✅ Фаза 7: Управление цепочками поставок (Завершено)
+
+- [x] Supply Chains List Page
+  - [x] SupplyChainsListPage с пагинацией
+  - [x] Клик на карточку → открывает drawer с деталями
+  - [x] Кнопка "Create Supply Chain" → открывает drawer с формой
+  - [x] Кнопка "View Graph" → открывает интерактивный граф
+  - [x] Кнопка удаления (role-based)
+  - [x] Empty states и loading states
+- [x] Supply Chain Details Component
+  - [x] SupplyChainDetails компонент
+  - [x] Статистика сети (nodes, connections, total distance)
+  - [x] Список соединений с деталями
+  - [x] Company ID
+  - [x] Кнопка "Edit Supply Chain" и "View Graph" в drawer
+- [x] Supply Chain Form Component
+  - [x] SupplyChainForm для create/edit
+  - [x] Валидация с Zod
+  - [x] Поля: title, description
+  - [x] Динамическое добавление соединений
+  - [x] onSuccess callback для обновления списка
+- [x] Supply Chain Graph Visualization
+  - [x] SupplyChainGraphVisualization с SVG
+  - [x] Круговая раскладка узлов
+  - [x] Направленные стрелки между узлами
+  - [x] Отображение расстояний на соединениях
+  - [x] Hover эффекты с информацией о узлах
+  - [x] Клик на соединение → переход к грузам
+  - [x] Отображение количества грузов на соединении
+  - [x] Поддержка любой топологии (циклы, несколько корней)
+- [x] API Integration
+  - [x] supply-chains.api.ts (getSupplyChains, getSupplyChainById, createSupplyChain, updateSupplyChain, deleteSupplyChain)
+  - [x] supply-chain.schemas.ts (createSupplyChainSchema, updateSupplyChainSchema)
+  - [x] Интеграция с supply-nodes API
+- [x] Backend Graph Improvements
+  - [x] SupplyChainGraph класс обновлен
+  - [x] buildCompleteGraph() для всех соединений
+  - [x] findRootNodes() для определения начальных точек
+  - [x] Поддержка циклов и несвязанных компонентов
+- [x] Role-based Access
+  - [x] Create: co-founder, logistician
+  - [x] Edit: co-founder, logistician
+  - [x] Delete: co-founder, logistician
+  - [x] View: co-founder, logistician
+- [x] Routes
+  - [x] /supply-chains маршрут добавлен
+
+## ✅ Фаза 8: Supply Nodes (Завершена)
+
+- [x] Supply Nodes List Page
+  - [x] SupplyNodesListPage с пагинацией
+  - [x] Фильтры (title, country, city, region)
+  - [x] URL search params синхронизация
+  - [x] Клик на карточку → открывает drawer с деталями
+  - [x] Кнопка "Create Supply Node" → открывает drawer с формой
+  - [x] Кнопка удаления (role-based)
+  - [x] Empty states и loading states
+- [x] Supply Node Details Component
+  - [x] SupplyNodeDetails компонент
+  - [x] Отображение location информации
+  - [x] Company ID
+  - [x] Description (если есть)
+  - [x] Кнопка "Edit Supply Node" в drawer
+- [x] Supply Node Form Component
+  - [x] SupplyNodeForm для create/edit
+  - [x] Валидация с Zod
+  - [x] Поля: title, description, address_line, city, region, country, zip
+  - [x] Responsive grid layout
+  - [x] onSuccess callback для обновления списка
+- [x] API Integration
+  - [x] supply-nodes.api.ts (getSupplyNodes, getSupplyNodeById, createSupplyNode, updateSupplyNode, deleteSupplyNode)
+  - [x] supply-node.schemas.ts (createSupplyNodeSchema, updateSupplyNodeSchema)
+  - [x] Типы с правильными field names (address_line snake_case)
+- [x] Backend Compatibility
+  - [x] Frontend DTOs используют snake_case для соответствия backend
+  - [x] Схемы валидации используют address_line (не addressLine)
+  - [x] Формы используют правильные field names
+- [x] Role-based Access
+  - [x] Create: co-founder, logistician
+  - [x] Edit: co-founder, logistician
+  - [x] Delete: co-founder, logistician
+  - [x] View: все роли
+- [x] Routes
+  - [x] /supply-nodes маршрут добавлен
+
+## ✅ Дополнительные улучшения (Завершено)
+
+- [x] Cargo Supply Chain Selector
+  - [x] Двухэтапный селектор в CargoForm
+  - [x] Выбор цепочки поставок → загрузка соединений
+  - [x] Отображение соединений в формате "Node A → Node B (150 km)"
+  - [x] Умная предзагрузка при редактировании
+  - [x] Валидация и обработка ошибок
+- [x] Order Cargo Filter
+  - [x] Фильтр по orderId в CargosListPage
+  - [x] URL параметр поддержка (?orderId=...)
+  - [x] Кнопка "View All" в OrderDetails
+  - [x] Навигация из заказа к его грузам
+  - [x] Визуальная индикация активного фильтра
+- [x] Supply Chain Cargo Integration
+  - [x] Фильтр по supplyNodeConnectionId
+  - [x] Клик на соединение → переход к грузам
+  - [x] Отображение количества грузов на соединении
+  - [x] getCargoCountByConnection API метод
+
+## ⏳ Фаза 9-15: Остальные модули
+
+- [ ] Vehicles Management (Фаза 9)
+- [ ] Receivers Management (Фаза 10)
+- [ ] Advanced Analytics (Фаза 11)
+- [ ] Real-time Tracking (Фаза 12)
+- [ ] Notifications System (Фаза 13)
+- [ ] Reports & Export (Фаза 14)
+- [ ] Mobile Optimization (Фаза 15)
 
 ---
 
-**Последнее обновление:** 10 мая 2026  
-**Текущий статус:** Фаза 5 завершена ✅  
-**Следующая фаза:** Управление грузами (Фаза 6)  
-**Прогресс:** 5/15 фаз (33%)
+**Последнее обновление:** 11 мая 2026  
+**Текущий статус:** Фазы 0-8 + дополнительные улучшения завершены ✅  
+**Следующая фаза:** Vehicles (Фаза 9)  
+**Прогресс:** 8/15 основных фаз + 3 дополнительных улучшения (60%)

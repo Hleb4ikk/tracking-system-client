@@ -8,3 +8,5 @@ export * from './vehicles.api';
 export * from './receivers.api';
 export * from './company.api';
 export * from './invitations.api';
+export * from './supply-nodes.api';
+export * from './supply-chains.api';

@@ -1,15 +1,16 @@
 import React from 'react';
-import { Clock, MapPin, Package } from 'lucide-react';
-import { Badge, Spinner } from '../../ui';
+import { Clock, MapPin, Package, ExternalLink } from 'lucide-react';
+import { Badge, Spinner, Button } from '../../ui';
 import { formatDate } from '../../../utils/formatters';
 import type { OrderWithDetails } from '../../../types';
 
 interface OrderDetailsProps {
   order: OrderWithDetails | null;
   isLoading: boolean;
+  onViewAllCargos?: (orderId: string) => void;
 }
 
-export const OrderDetails: React.FC<OrderDetailsProps> = ({ order, isLoading }) => {
+export const OrderDetails: React.FC<OrderDetailsProps> = ({ order, isLoading, onViewAllCargos }) => {
   if (isLoading) {
     return (
       <div className="flex justify-center items-center py-12">
@@ -78,11 +79,24 @@ export const OrderDetails: React.FC<OrderDetailsProps> = ({ order, isLoading }) 
       {/* Cargos */}
       {order.cargos && order.cargos.length > 0 && (
         <div>
-          <div className="flex items-center gap-2 mb-3">
-            <Package className="w-5 h-5 text-gray-500" />
-            <h4 className="font-medium text-gray-900 dark:text-gray-100">
-              Cargos ({order.cargos.length})
-            </h4>
+          <div className="flex items-center justify-between mb-3">
+            <div className="flex items-center gap-2">
+              <Package className="w-5 h-5 text-gray-500" />
+              <h4 className="font-medium text-gray-900 dark:text-gray-100">
+                Cargos ({order.cargos.length})
+              </h4>
+            </div>
+            {onViewAllCargos && (
+              <Button
+                variant="secondary"
+                size="sm"
+                onClick={() => onViewAllCargos(order.id)}
+                className="flex items-center gap-1"
+              >
+                View All
+                <ExternalLink className="w-3 h-3" />
+              </Button>
+            )}
           </div>
           <div className="space-y-2">
             {order.cargos.map((cargo) => (

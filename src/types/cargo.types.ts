@@ -17,20 +17,20 @@ export interface Cargo {
 export interface CreateCargoDto {
   title: string;
   description: string;
-  supply_node_connection_id: string;
+  supplyNodeConnectionId: string;
   status: CargoStatus;
-  vehicle_id?: string;
-  order_id?: string;
+  vehicleId?: string;
+  orderId?: string;
   responsibleId: string;
 }
 
 export interface UpdateCargoDto {
   title?: string;
   description?: string;
-  supply_node_connection_id?: string;
+  supplyNodeConnectionId?: string;
   status?: CargoStatus;
-  vehicle_id?: string;
-  order_id?: string;
+  vehicleId?: string;
+  orderId?: string;
   responsibleId?: string;
 }
 
@@ -40,4 +40,5 @@ export interface CargoFilters {
   orderId?: string;
   responsibleId?: string;
   companyId?: string;
+  supplyNodeConnectionId?: string;
 }

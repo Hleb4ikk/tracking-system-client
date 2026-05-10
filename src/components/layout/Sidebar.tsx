@@ -4,7 +4,6 @@ import {
   LayoutDashboard,
   Package,
   Truck,
-  Users,
   MapPin,
   Building2,
   UserCircle,
@@ -70,12 +69,6 @@ const navigationItems: NavItem[] = [
     label: 'Company',
     path: ROUTES.COMPANY,
     icon: <Building2 className="w-5 h-5" />,
-  },
-  {
-    label: 'Team',
-    path: ROUTES.COMPANY_TEAM,
-    icon: <Users className="w-5 h-5" />,
-    roles: [ROLES.CO_FOUNDER],
   },
   {
     label: 'Invitations',

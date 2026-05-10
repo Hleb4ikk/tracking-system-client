@@ -18,7 +18,7 @@ interface AuthState {
   clearError: () => void;
 }
 
-export const useAuthStore = create<AuthState>((set) => ({
+export const useAuthStore = create<AuthState>((set, get) => ({
   user: null,
   isAuthenticated: false,
   isLoading: false,
@@ -84,6 +84,12 @@ export const useAuthStore = create<AuthState>((set) => ({
   },
 
   checkAuth: async () => {
+    // Prevent multiple simultaneous auth checks
+    const { isLoading, isInitialized } = get();
+    if (isLoading || isInitialized) {
+      return;
+    }
+
     set({ isLoading: true, error: null });
     try {
       const response = await userApi.getCurrentUser();

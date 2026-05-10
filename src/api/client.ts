@@ -33,7 +33,7 @@ apiClient.interceptors.response.use(
         statusCode: error.response.status,
         error: error.response.data?.error || error.response.statusText,
       };
-      if (error.response.status === 401 && !error.config?.url?.includes('/auth/login')) {
+      if (error.response.status === 401 && !error.config?.url?.includes('/auth/login') && !window.location.href.includes("/login")) {
         window.location.href = '/login';
       }
 

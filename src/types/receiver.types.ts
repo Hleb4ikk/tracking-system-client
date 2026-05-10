@@ -20,3 +20,11 @@ export interface UpdateReceiverDto {
   email?: string;
   phone?: string;
 }
+
+export interface ReceiverFilters {
+  name?: string;
+  surname?: string;
+  email?: string;
+  phone?: string;
+  companyId?: string;
+}

@@ -4,3 +4,6 @@ export * from './cargo.schemas';
 export * from './receiver.schemas';
 export * from './company.schemas';
 export * from './invitation.schemas';
+export * from './supply-node.schemas';
+export * from './supply-chain.schemas';
+export * from './vehicle.schemas';

@@ -9,14 +9,16 @@ export const cargosApi = {
     if (filters?.vehicleId) params.append('vehicleId', filters.vehicleId);
     if (filters?.orderId) params.append('orderId', filters.orderId);
     if (filters?.responsibleId) params.append('responsibleId', filters.responsibleId);
+    if (filters?.supplyNodeConnectionId) params.append('supplyNodeConnectionId', filters.supplyNodeConnectionId);
 
     const response = await apiClient.get<Cargo[]>(`/cargos?${params.toString()}`);
     return response.data;
   },
 
-  getCargoById: async (id: string): Promise<{ cargo: Cargo }> => {
-    const response = await apiClient.get<{ cargo: Cargo }>(`/cargos/${id}`);
-    return response.data;
+  // Get cargo count by connection ID
+  getCargoCountByConnection: async (connectionId: string): Promise<number> => {
+    const cargos = await cargosApi.getCargos(1, { supplyNodeConnectionId: connectionId });
+    return cargos.length;
   },
 
   createCargo: async (data: CreateCargoDto): Promise<{ message: string; cargo: Cargo }> => {

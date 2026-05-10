@@ -6,3 +6,5 @@ export * from './vehicle.types';
 export * from './receiver.types';
 export * from './company.types';
 export * from './supply-chain.types';
+export * from './supply-node.types';
+

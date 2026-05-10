@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useSearchParams } from 'react-router-dom';
+import { useSearchParams, useNavigate } from 'react-router-dom';
 import { ShoppingCart, Plus, Filter, X, Trash2, Clock, Edit } from 'lucide-react';
 import { Button, Input, Card, Badge, Spinner, Pagination } from '../../components/ui';
 import { OrderDetails, OrderForm } from '../../components/features/orders';
@@ -12,6 +12,7 @@ import { formatDate } from '../../utils/formatters';
 
 export const OrdersListPage: React.FC = () => {
   const [searchParams, setSearchParams] = useSearchParams();
+  const navigate = useNavigate();
   const toast = useToast();
   const { user } = useAuthStore();
   const { openDrawer } = useUIStore();
@@ -118,6 +119,10 @@ export const OrdersListPage: React.FC = () => {
     });
   };
 
+  const handleViewOrderCargos = (orderId: string) => {
+    navigate(`/cargos?orderId=${orderId}`);
+  };
+
   const handleCreateOrder = () => {
     openDrawer({
       title: 'Create Order',
@@ -161,7 +166,7 @@ export const OrdersListPage: React.FC = () => {
 
     return (
       <div>
-        <OrderDetails order={orderDetails} isLoading={loading} />
+        <OrderDetails order={orderDetails} isLoading={loading} onViewAllCargos={handleViewOrderCargos} />
         {!loading && orderDetails && canEdit && (
           <div className="mt-6 pt-6 border-t border-gray-200 dark:border-gray-700">
             <Button

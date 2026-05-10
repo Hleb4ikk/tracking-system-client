@@ -1,9 +1,27 @@
 import apiClient from './client';
-import { Receiver, CreateReceiverDto, UpdateReceiverDto } from '../types';
+import { Receiver, CreateReceiverDto, UpdateReceiverDto, ReceiverFilters } from '../types';
 
 export const receiversApi = {
-  getReceivers: async (page: number = 1): Promise<Receiver[]> => {
-    const response = await apiClient.get<Receiver[]>(`/recievers?page=${page}`);
+  getReceivers: async (page: number = 1, filters?: ReceiverFilters): Promise<Receiver[]> => {
+    const params = new URLSearchParams({ page: page.toString() });
+    
+    if (filters?.name) {
+      params.append('name', filters.name);
+    }
+    if (filters?.surname) {
+      params.append('surname', filters.surname);
+    }
+    if (filters?.email) {
+      params.append('email', filters.email);
+    }
+    if (filters?.phone) {
+      params.append('phone', filters.phone);
+    }
+    if (filters?.companyId) {
+      params.append('companyId', filters.companyId);
+    }
+
+    const response = await apiClient.get<Receiver[]>(`/recievers?${params.toString()}`);
     return response.data;
   },
 
