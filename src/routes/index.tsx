@@ -6,15 +6,9 @@ import { AuthLayout, AppLayout } from '../components/layout';
 import { LoginPage, RegisterPage } from '../pages/auth';
 import { DashboardPage } from '../pages/dashboard';
 import { CompanyOnboardingPage, InvitationsPage } from '../pages/company';
+import { OrdersListPage } from '../pages/orders';
 
 // Placeholder components for routes we'll create later
-const OrdersPage = () => (
-  <div>
-    <h1 className="text-2xl font-bold text-gray-900 dark:text-gray-100 mb-4">Orders</h1>
-    <p className="text-gray-600 dark:text-gray-400">Orders module coming in Phase 5</p>
-  </div>
-);
-
 const CargosPage = () => (
   <div>
     <h1 className="text-2xl font-bold text-gray-900 dark:text-gray-100 mb-4">Cargos</h1>
@@ -107,7 +101,7 @@ export const router = createBrowserRouter([
       },
       {
         path: ROUTES.ORDERS,
-        element: <OrdersPage />,
+        element: <OrdersListPage />,
       },
       {
         path: ROUTES.CARGOS,

@@ -160,24 +160,55 @@
   - [x] /company/invitations маршрут
   - [x] CompanyRequiredRoute wrapper
 
-## 🔄 Фаза 5: Управление заказами (Следующая)
+## ✅ Фаза 5: Управление заказами (Завершено)
 
-- [ ] AppLayout
-- [ ] Header
-- [ ] Sidebar
-- [ ] Навигация
+- [x] Universal GlobalDrawer
+  - [x] Drawer компонент с размерами (sm, md, lg, xl)
+  - [x] UIStore управление (openDrawer, closeDrawer)
+  - [x] Интеграция в App.tsx
+  - [x] Анимации и overlay
+- [x] Orders List Page
+  - [x] OrdersListPage с пагинацией
+  - [x] Фильтры (title, status)
+  - [x] URL search params синхронизация
+  - [x] Клик на карточку → открывает drawer с деталями
+  - [x] Кнопка "Create Order" → открывает drawer с формой
+  - [x] Кнопка удаления (role-based)
+  - [x] Empty states и loading states
+- [x] Order Details Component
+  - [x] OrderDetails компонент
+  - [x] Отображение receiver информации
+  - [x] Список cargos
+  - [x] Status history
+  - [x] Кнопка "Edit Order" в drawer
+- [x] Order Form Component
+  - [x] OrderForm для create/edit
+  - [x] Валидация с Zod
+  - [x] Выбор receiver из списка
+  - [x] Автоматическое заполнение responsible (текущий user)
+  - [x] onSuccess callback для обновления списка
+- [x] API Integration
+  - [x] orders.api.ts (getOrders, getOrderById, createOrder, updateOrder, deleteOrder)
+  - [x] receivers.api.ts (getReceivers для формы)
+  - [x] order.schemas.ts (createOrderSchema, updateOrderSchema)
+- [x] Role-based Access
+  - [x] Create: co-founder, logistician
+  - [x] Edit: co-founder, logistician
+  - [x] Delete: co-founder, logistician
+  - [x] View: все роли
 
-## ⏳ Фаза 4: Dashboard
+## ⏳ Фаза 6: Управление грузами (Следующая)
 
-- [ ] Статистика
-- [ ] Графики
-- [ ] Списки
+- [ ] Cargos List Page
+- [ ] Cargo Details
+- [ ] Cargo Form (create/edit)
+- [ ] Привязка к orders
 
-## ⏳ Фаза 5-15: Остальные модули
+## ⏳ Фаза 7-15: Остальные модули
 
 ---
 
 **Последнее обновление:** 10 мая 2026  
-**Текущий статус:** Фаза 4.5 завершена ✅  
-**Следующая фаза:** Управление заказами (Фаза 5)  
-**Прогресс:** 4.5/15 фаз (30%)
+**Текущий статус:** Фаза 5 завершена ✅  
+**Следующая фаза:** Управление грузами (Фаза 6)  
+**Прогресс:** 5/15 фаз (33%)

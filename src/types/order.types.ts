@@ -46,6 +46,7 @@ export interface UpdateOrderDto {
 }
 
 export interface OrderFilters {
+  title?: string;
   status?: string;
   responsibleId?: string;
   recieverId?: string;

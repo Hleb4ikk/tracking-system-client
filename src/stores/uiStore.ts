@@ -14,10 +14,19 @@ interface Modal {
   content?: React.ReactNode;
 }
 
+interface DrawerState {
+  isOpen: boolean;
+  title: string;
+  content: React.ReactNode | null;
+  size?: 'sm' | 'md' | 'lg' | 'xl';
+  footer?: React.ReactNode;
+}
+
 interface UIState {
   toasts: Toast[];
   modals: Modal[];
   isSidebarOpen: boolean;
+  drawer: DrawerState;
   
   // Toast actions
   addToast: (toast: Omit<Toast, 'id'>) => void;
@@ -30,12 +39,22 @@ interface UIState {
   // Sidebar actions
   toggleSidebar: () => void;
   setSidebarOpen: (isOpen: boolean) => void;
+  
+  // Drawer actions
+  openDrawer: (config: Omit<DrawerState, 'isOpen'>) => void;
+  closeDrawer: () => void;
 }
 
 export const useUIStore = create<UIState>((set) => ({
   toasts: [],
   modals: [],
   isSidebarOpen: window.innerWidth >= 1024, // Open by default on desktop
+  drawer: {
+    isOpen: false,
+    title: '',
+    content: null,
+    size: 'md',
+  },
 
   addToast: (toast) => {
     const id = Math.random().toString(36).substring(7);
@@ -81,5 +100,34 @@ export const useUIStore = create<UIState>((set) => ({
 
   setSidebarOpen: (isOpen) => {
     set({ isSidebarOpen: isOpen });
+  },
+
+  openDrawer: (config) => {
+    set({
+      drawer: {
+        ...config,
+        isOpen: true,
+      },
+    });
+  },
+
+  closeDrawer: () => {
+    set((state) => ({
+      drawer: {
+        ...state.drawer,
+        isOpen: false,
+      },
+    }));
+    // Clear content after animation
+    setTimeout(() => {
+      set({
+        drawer: {
+          isOpen: false,
+          title: '',
+          content: null,
+          size: 'md',
+        },
+      });
+    }, 300);
   },
 }));

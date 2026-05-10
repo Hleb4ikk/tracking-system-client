@@ -15,6 +15,7 @@ export const ordersApi = {
   ): Promise<OrderWithHistory[]> => {
     const params = new URLSearchParams({ page: page.toString() });
     
+    if (filters?.title) params.append('title', filters.title);
     if (filters?.status) params.append('status', filters.status);
     if (filters?.responsibleId) params.append('responsibleId', filters.responsibleId);
     if (filters?.recieverId) params.append('recieverId', filters.recieverId);
