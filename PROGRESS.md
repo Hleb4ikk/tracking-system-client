@@ -78,7 +78,89 @@
   - [x] Кнопка logout
   - [x] Quick actions
 
-## 🔄 Фаза 3: Основной Layout (Следующая)
+## ✅ Фаза 3: Основной Layout (Завершено)
+
+- [x] AppLayout с sidebar
+  - [x] AppLayout компонент
+  - [x] Responsive layout
+  - [x] Интеграция с UIStore
+- [x] Header с навигацией
+  - [x] Header компонент
+  - [x] User menu dropdown
+  - [x] Notifications bell
+  - [x] Logout функционал
+- [x] Sidebar с меню
+  - [x] Sidebar компонент
+  - [x] Навигация по ролям
+  - [x] Mobile overlay
+  - [x] Иконки для всех разделов
+- [x] Breadcrumbs
+  - [x] Breadcrumbs компонент
+  - [x] Автоматическая генерация
+  - [x] Home icon
+- [x] Дополнительно
+  - [x] useWindowSize хук
+  - [x] useBreakpoint хук
+  - [x] checkAuth при загрузке
+  - [x] GET /users/me endpoint
+  - [x] Исправлена обработка ошибок API
+
+## ✅ Фаза 4: Dashboard (Завершено)
+
+- [x] Backend API для статистики
+  - [x] DashboardController
+  - [x] DashboardService
+  - [x] GET /dashboard/stats
+  - [x] GET /dashboard/recent-orders
+  - [x] GET /dashboard/active-cargos
+- [x] Frontend API клиент
+  - [x] dashboard.api.ts
+  - [x] Типы для Dashboard
+- [x] Dashboard Store
+  - [x] dashboardStore.ts
+  - [x] fetchStats, fetchRecentOrders, fetchActiveCargos
+  - [x] fetchAll для параллельной загрузки
+- [x] Обновленный Dashboard
+  - [x] Реальные данные вместо mock
+  - [x] Статистика с growth indicators
+  - [x] Recent orders с навигацией
+  - [x] Active cargos с навигацией
+  - [x] Loading states
+  - [x] Empty states
+
+## ✅ Фаза 4.5: Управление компанией и приглашениями (Завершено)
+
+- [x] Company Onboarding Flow
+  - [x] CompanyOnboardingPage с 3 режимами
+  - [x] Создание компании (title, description)
+  - [x] Присоединение по invitation ID
+  - [x] CompanyRequiredRoute для защиты маршрутов
+  - [x] Редирект на /onboarding если нет company_id
+  - [x] Обновление user после создания/присоединения
+- [x] Управление приглашениями
+  - [x] InvitationsPage
+  - [x] Список приглашений с фильтрами
+  - [x] Создание приглашения (email, role, expiration)
+  - [x] Удаление приглашения
+  - [x] Копирование invitation ID
+  - [x] Role-based access (co-founder, logistician)
+- [x] API Layer
+  - [x] invitations.api.ts (полный CRUD)
+  - [x] company.api.ts (обновлен под backend)
+  - [x] Типы и интерфейсы
+- [x] Validation Schemas
+  - [x] company.schemas.ts
+  - [x] invitation.schemas.ts
+- [x] UI Components
+  - [x] LoadingOverlay
+  - [x] Modal для создания приглашений
+  - [x] Empty states
+- [x] Routing
+  - [x] /onboarding маршрут
+  - [x] /company/invitations маршрут
+  - [x] CompanyRequiredRoute wrapper
+
+## 🔄 Фаза 5: Управление заказами (Следующая)
 
 - [ ] AppLayout
 - [ ] Header
@@ -96,5 +178,6 @@
 ---
 
 **Последнее обновление:** 10 мая 2026  
-**Текущий статус:** Фаза 2 завершена ✅  
-**Следующая фаза:** Основной Layout (Фаза 3)
+**Текущий статус:** Фаза 4.5 завершена ✅  
+**Следующая фаза:** Управление заказами (Фаза 5)  
+**Прогресс:** 4.5/15 фаз (30%)

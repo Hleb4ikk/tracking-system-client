@@ -7,7 +7,7 @@ export interface Company {
 
 export interface CreateCompanyDto {
   title: string;
-  description?: string;
+  description?: string | null;
 }
 
 export interface UpdateCompanyDto {

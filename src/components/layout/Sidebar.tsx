@@ -11,6 +11,7 @@ import {
   ShoppingCart,
   Network,
   X,
+  Mail,
 } from 'lucide-react';
 import { useAuthStore, useUIStore } from '../../stores';
 import { ROUTES, ROLES } from '../../constants';
@@ -75,6 +76,12 @@ const navigationItems: NavItem[] = [
     path: ROUTES.COMPANY_TEAM,
     icon: <Users className="w-5 h-5" />,
     roles: [ROLES.CO_FOUNDER],
+  },
+  {
+    label: 'Invitations',
+    path: ROUTES.COMPANY_INVITATIONS,
+    icon: <Mail className="w-5 h-5" />,
+    roles: [ROLES.CO_FOUNDER, ROLES.LOGISTICIAN],
   },
 ];
 

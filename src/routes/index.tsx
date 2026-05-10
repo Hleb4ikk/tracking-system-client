@@ -1,9 +1,11 @@
 import { createBrowserRouter, Navigate } from 'react-router-dom';
 import { ROUTES } from '../constants';
 import { ProtectedRoute } from './ProtectedRoute';
+import { CompanyRequiredRoute } from './CompanyRequiredRoute';
 import { AuthLayout, AppLayout } from '../components/layout';
 import { LoginPage, RegisterPage } from '../pages/auth';
 import { DashboardPage } from '../pages/dashboard';
+import { CompanyOnboardingPage, InvitationsPage } from '../pages/company';
 
 // Placeholder components for routes we'll create later
 const OrdersPage = () => (
@@ -82,10 +84,20 @@ export const router = createBrowserRouter([
     ],
   },
   {
+    path: ROUTES.COMPANY_ONBOARDING,
+    element: (
+      <ProtectedRoute>
+        <CompanyOnboardingPage />
+      </ProtectedRoute>
+    ),
+  },
+  {
     path: '/',
     element: (
       <ProtectedRoute>
-        <AppLayout />
+        <CompanyRequiredRoute>
+          <AppLayout />
+        </CompanyRequiredRoute>
       </ProtectedRoute>
     ),
     children: [
@@ -127,7 +139,7 @@ export const router = createBrowserRouter([
       },
       {
         path: ROUTES.COMPANY_INVITATIONS,
-        element: <CompanyPage />,
+        element: <InvitationsPage />,
       },
       {
         path: ROUTES.COMPANY_SETTINGS,
@@ -162,3 +174,4 @@ export const router = createBrowserRouter([
 
 export * from './ProtectedRoute';
 export * from './RoleBasedRoute';
+export * from './CompanyRequiredRoute';
